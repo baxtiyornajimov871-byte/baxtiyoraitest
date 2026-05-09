@@ -1,87 +1,93 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 
 {% block title %}Chat - BaxtiyorAiTest{% endblock %}
 
 {% block content %}
-<div class="flex h-full" id="chat-container">
-    
-    <!-- Chat Area -->
-    <div class="flex-1 flex flex-col h-full">
-        
-        <!-- Chat Header -->
-        <div class="border-b border-white/10 bg-gray-900 px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <button onclick="toggleSidebar()" class="lg:hidden text-2xl text-gray-400 hover:text-white">
+<div class="chat-shell flex min-h-[calc(100vh-4rem)] overflow-hidden text-white">
+    <aside id="sidebar" class="sidebar glass hidden lg:flex flex-col border-r border-white/10 shadow-xl shadow-black/20">
+        <div class="sidebar-header px-5 py-5 border-b border-white/10">
+            <div class="flex items-center justify-between gap-4">
+                <div>
+                    <p class="text-xs uppercase tracking-[0.35em] text-gray-400">Suhbatlar</p>
+                    <h2 class="mt-2 text-2xl font-semibold">Baxtiyor AI</h2>
+                </div>
+                <button id="sidebar-close" onclick="toggleSidebar()" class="lg:hidden text-gray-400 hover:text-white transition">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="mt-5">
+                <input id="chat-search" type="search" placeholder="Suhbatlarni qidiring..."
+                    class="w-full rounded-3xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-gray-100 outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20" />
+            </div>
+            <button id="new-chat-btn" type="button"
+                class="mt-5 w-full rounded-3xl bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-purple-500/30 transition hover:-translate-y-0.5">
+                <i class="fas fa-plus mr-2"></i>
+                Yangi suhbat
+            </button>
+        </div>
+
+        <div id="conversations-list" class="sidebar-body flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar">
+            <div class="rounded-3xl border border-dashed border-white/10 bg-white/5 p-6 text-center text-sm text-gray-400">
+                Suhbatlar yuklanmoqda...
+            </div>
+        </div>
+    </aside>
+
+    <section class="chat-main relative flex flex-1 flex-col bg-[radial-gradient(circle_at_top,_rgba(168,85,247,0.16),_transparent_35%),_linear-gradient(180deg,#05070a,#0f1117)]">
+        <div class="chat-header flex items-center justify-between gap-3 border-b border-white/10 px-5 py-5 lg:px-8">
+            <div class="flex items-center gap-3">
+                <button id="sidebar-toggle" onclick="toggleSidebar()" class="lg:hidden text-gray-400 hover:text-white transition">
                     <i class="fas fa-bars"></i>
                 </button>
                 <div>
-                    <h1 id="chat-title" class="font-semibold text-lg">New Conversation</h1>
-                    <p id="chat-model" class="text-xs text-gray-500">llama3-70b-8192 • Groq</p>
+                    <p class="text-xs uppercase tracking-[0.3em] text-purple-400/80">AI suhbat</p>
+                    <h1 id="chat-title" class="text-2xl font-semibold">Yangi suhbat</h1>
+                    <p id="chat-subtitle" class="mt-1 text-sm text-gray-400">llama3-70b-8192 • Groq</p>
                 </div>
             </div>
-            
-            <div class="flex items-center gap-3">
-                <button onclick="renameChat()" 
-                        class="px-4 py-2 text-sm border border-white/20 hover:border-white/40 rounded-xl flex items-center gap-2">
-                    <i class="fas fa-edit"></i>
-                    <span class="hidden sm:inline">Rename</span>
-                </button>
-                
-                <button onclick="toggleFavorite()" 
-                        class="px-4 py-2 text-sm border border-white/20 hover:border-white/40 rounded-xl flex items-center gap-2">
-                    <i class="fas fa-star"></i>
-                </button>
-                
-                <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-sm font-bold cursor-pointer" id="user-avatar">
-                    U
+            <button id="new-chat-btn-top" type="button" onclick="createNewChat()"
+                class="hidden items-center gap-2 rounded-3xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white transition hover:border-white/20 hover:bg-white/10 lg:flex">
+                <i class="fas fa-plus"></i>
+                Yangi suhbat
+            </button>
+        </div>
+
+        <div id="messages" class="chat-content flex-1 overflow-y-auto px-5 py-6 lg:px-8 custom-scrollbar">
+            <div id="empty-state" class="flex min-h-[320px] flex-col items-center justify-center gap-4 rounded-3xl border border-dashed border-white/10 bg-white/5 p-10 text-center text-gray-400">
+                <div class="text-6xl">🤖</div>
+                <div class="space-y-3 max-w-xl">
+                    <h2 class="text-3xl font-semibold text-white">Salom! Qanday yordam bera olaman?</h2>
+                    <p class="leading-7 text-gray-400">Yangi suhbat boshlash uchun xabar yozing yoki avvalgi suhbatlaringizdan birini tanlang.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Messages Area -->
-        <div id="messages" class="flex-1 overflow-y-auto p-6 space-y-8 bg-gray-950 custom-scrollbar">
-            <!-- Messages will be loaded here by JavaScript -->
-            <div class="flex flex-col items-center justify-center h-full text-center py-20 text-gray-400" id="empty-state">
-                <div class="text-6xl mb-6 opacity-50">🤖</div>
-                <h3 class="text-2xl font-medium mb-2">Salom! Qanday yordam bera olaman?</h3>
-                <p class="max-w-md">Yangi suhbat boshlash uchun xabar yozing yoki pastdagi misollardan birini tanlang.</p>
-            </div>
-        </div>
-
-        <!-- Input Area -->
-        <div class="border-t border-white/10 bg-gray-900 p-6">
-            <div class="max-w-4xl mx-auto">
+        <div class="chat-input border-t border-white/10 bg-[#08090f] px-5 py-5 lg:px-8">
+            <form id="chat-form" class="mx-auto flex max-w-5xl flex-col gap-3">
                 <div class="relative">
                     <textarea id="message-input" rows="1"
-                        class="w-full bg-gray-800 border border-gray-700 rounded-3xl px-7 py-5 pr-28 focus:outline-none focus:border-purple-500 resize-none max-h-52"
-                        placeholder="Xabaringizni yozing..."></textarea>
-                    
-                    <div class="absolute bottom-4 right-4 flex items-center gap-3">
-                        <button onclick="attachFile()" 
-                                class="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 rounded-2xl transition-colors">
-                            <i class="fas fa-paperclip"></i>
+                        class="chat-textarea min-h-[70px] w-full resize-none rounded-[32px] border border-white/10 bg-white/5 px-5 py-4 pr-32 text-sm text-white outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
+                        placeholder="Xabar yuboring..."></textarea>
+                    <div class="absolute right-3 top-1/2 flex -translate-y-1/2 items-center gap-2">
+                        <button type="button" onclick="toggleSidebar()" class="icon-button rounded-2xl bg-white/5 p-3 text-gray-400 transition hover:bg-white/10 hover:text-white" title="Suhbatlar">
+                            <i class="fas fa-layer-group"></i>
                         </button>
-                        
-                        <button onclick="sendMessage()" 
-                                class="w-11 h-11 bg-purple-600 hover:bg-purple-500 rounded-2xl flex items-center justify-center transition-all active:scale-95">
+                        <button type="submit" class="send-button rounded-2xl bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-purple-500/30 transition hover:-translate-y-0.5">
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
                 </div>
-                
-                <div class="text-center text-[10px] text-gray-500 mt-3">
-                    BaxtiyorAiTest Groq va HuggingFace'dan foydalanadi • Javoblar AI tomonidan yaratiladi
-                </div>
-            </div>
+                <p class="text-center text-xs text-gray-500">BaxtiyorAiTest Groq va HuggingFace'ni qo'llab-quvvatlaydi. Javoblar AI tomonidan yaratiladi.</p>
+            </form>
         </div>
-    </div>
+    </section>
 </div>
 {% endblock %}
 
 {% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="/static/js/chat.js"></script>
 <script>
-    // Initialize chat when page loads
     window.onload = function() {
         initChat();
     };

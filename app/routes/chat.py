@@ -3,7 +3,7 @@ BaxtiyorAiTest - Chat Routes
 Main AI Chat API endpoints (ChatGPT-like experience)
 """
 
-from flask import request, jsonify, stream_with_context, Response
+from flask import request, jsonify, render_template, stream_with_context, Response
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.routes import chat_bp
 from app.services.chat_service import ChatService
@@ -49,6 +49,12 @@ def get_user_chats():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+@chat_bp.route('/chat', methods=['GET'])
+def render_chat():
+    """Render the chat user interface."""
+    return render_template('chat.html')
 
 
 @chat_bp.route('/<int:conversation_id>', methods=['GET'])
