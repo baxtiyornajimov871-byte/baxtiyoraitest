@@ -30,42 +30,28 @@ def create_app(config_class=Config):
     migrate.init_app(app, db)
     limiter.init_app(app)
 
-    # CORS Configuration
-    CORS(app, 
-         resources={r"/api/*": {"origins": "*"}},
-         supports_credentials=True)
+    # CORS
+    CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
 
-    # Register Blueprints
-    from .routes import register_blueprints
-    register_blueprints(app)
+    # === BLUEPRINTS VA ERROR HANDLERLarni vaqtincha o‘chirib turamiz ===
+    # from .routes import register_blueprints
+    # register_blueprints(app)
 
-    # Error Handler
-    from .middleware.error_handler import register_error_handlers
-    register_error_handlers(app)
+    # from .middleware.error_handler import register_error_handlers
+    # register_error_handlers(app)
 
-    # Logging Configuration
+    # Logging
     if not app.debug and not app.testing:
-        if not os.path.exists('logs'):
-            os.makedirs('logs')
-        
-        file_handler = RotatingFileHandler(
-            'logs/baxtiyoraI.log', 
-            maxBytes=10 * 1024 * 1024,  # 10MB
-            backupCount=10
-        )
-        file_handler.setFormatter(logging.Formatter(
-            '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
-        ))
+        os.makedirs('logs', exist_ok=True)
+        file_handler = RotatingFileHandler('logs/baxtiyoraI.log', maxBytes=10*1024*1024, backupCount=10)
+        file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
         file_handler.setLevel(logging.INFO)
         app.logger.addHandler(file_handler)
         app.logger.setLevel(logging.INFO)
 
-    # Create required directories
-    required_dirs = ['uploads', 'logs', 'backups', 'instance']
-    for directory in required_dirs:
+    # Create directories
+    for directory in ['uploads', 'logs', 'backups', 'instance']:
         os.makedirs(directory, exist_ok=True)
 
     app.logger.info('🚀 BaxtiyorAiTest Application initialized successfully')
-    app.logger.info(f'📍 Environment: {app.config.get("FLASK_ENV", "development")}')
-    
     return app
