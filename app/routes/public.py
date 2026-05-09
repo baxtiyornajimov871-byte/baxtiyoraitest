@@ -16,12 +16,6 @@ def home():
     return render_template('index.html')
 
 
-@public_bp.route('/chat', methods=['GET'])
-def chat_page():
-    """Render the public chat page."""
-    return render_template('chat.html')
-
-
 @public_bp.route('/bots', methods=['GET'])
 def public_bots():
     """Public Bot Marketplace"""

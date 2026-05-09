@@ -29,11 +29,13 @@ def create_app(config_class=Config):
 
     # BLUEPRINTLARNI YOQISH
     try:
-        from .routes import register_blueprints
+        from .routes.init import register_blueprints
         register_blueprints(app)
         print("✅ All blueprints registered successfully")
     except Exception as e:
         print(f"❌ Blueprint error: {e}")
+        import traceback
+        traceback.print_exc()
 
     # Logging
     if not app.debug:

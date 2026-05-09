@@ -19,7 +19,7 @@ def register_blueprints(app):
     
     # Chat & Conversation Routes
     from .chat import chat_bp
-    app.register_blueprint(chat_bp, url_prefix='/api/chat')
+    app.register_blueprint(chat_bp, url_prefix='')
     
     from .conversation import conversation_bp
     app.register_blueprint(conversation_bp, url_prefix='/api/conversations')

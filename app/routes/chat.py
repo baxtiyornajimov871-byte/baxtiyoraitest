@@ -12,7 +12,7 @@ from app.services.analytics_service import AnalyticsService
 import time
 
 
-@chat_bp.route('/new', methods=['POST'])
+@chat_bp.route('/api/chat/new', methods=['POST'])
 @jwt_required()
 def create_new_chat():
     """Create a new conversation"""
@@ -35,7 +35,7 @@ def create_new_chat():
         return jsonify({"error": str(e)}), 500
 
 
-@chat_bp.route('/', methods=['GET'])
+@chat_bp.route('/api/chat/', methods=['GET'])
 @jwt_required()
 def get_user_chats():
     """Get all user conversations"""
@@ -57,7 +57,7 @@ def render_chat():
     return render_template('chat.html')
 
 
-@chat_bp.route('/<int:conversation_id>', methods=['GET'])
+@chat_bp.route('/api/chat/<int:conversation_id>', methods=['GET'])
 @jwt_required()
 def get_chat(conversation_id):
     """Get single conversation with messages"""
@@ -79,7 +79,7 @@ def get_chat(conversation_id):
         return jsonify({"error": str(e)}), 500
 
 
-@chat_bp.route('/<int:conversation_id>/message', methods=['POST'])
+@chat_bp.route('/api/chat/<int:conversation_id>/message', methods=['POST'])
 @jwt_required()
 def send_message(conversation_id):
     """Send message to AI and get response"""
@@ -150,7 +150,7 @@ def send_message(conversation_id):
         return jsonify({"error": str(e)}), 500
 
 
-@chat_bp.route('/<int:conversation_id>/rename', methods=['PUT'])
+@chat_bp.route('/api/chat/<int:conversation_id>/rename', methods=['PUT'])
 @jwt_required()
 def rename_chat(conversation_id):
     """Rename conversation"""
@@ -173,7 +173,7 @@ def rename_chat(conversation_id):
         return jsonify({"error": str(e)}), 400
 
 
-@chat_bp.route('/<int:conversation_id>/pin', methods=['POST'])
+@chat_bp.route('/api/chat/<int:conversation_id>/pin', methods=['POST'])
 @jwt_required()
 def pin_chat(conversation_id):
     """Pin / Unpin conversation"""
@@ -185,7 +185,7 @@ def pin_chat(conversation_id):
         return jsonify({"error": str(e)}), 400
 
 
-@chat_bp.route('/<int:conversation_id>', methods=['DELETE'])
+@chat_bp.route('/api/chat/<int:conversation_id>', methods=['DELETE'])
 @jwt_required()
 def delete_chat(conversation_id):
     """Delete conversation"""
@@ -197,7 +197,7 @@ def delete_chat(conversation_id):
         return jsonify({"error": str(e)}), 400
 
 
-@chat_bp.route('/search', methods=['GET'])
+@chat_bp.route('/api/chat/search', methods=['GET'])
 @jwt_required()
 def search_chats():
     """Search conversations"""
