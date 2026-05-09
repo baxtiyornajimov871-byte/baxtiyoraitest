@@ -27,13 +27,13 @@ def create_app(config_class=Config):
 
     CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
 
-    # === BLUEPRINTLARNI QAYTA YOQAMIZ ===
+    # BLUEPRINTLARNI YOQISH
     try:
         from .routes import register_blueprints
         register_blueprints(app)
-        print("✅ Blueprints successfully registered")
+        print("✅ All blueprints registered successfully")
     except Exception as e:
-        print(f"⚠️ Blueprint registration failed: {e}")
+        print(f"❌ Blueprint error: {e}")
 
     # Logging
     if not app.debug:
@@ -44,19 +44,9 @@ def create_app(config_class=Config):
         app.logger.addHandler(file_handler)
         app.logger.setLevel(logging.INFO)
 
-    # Directories
     for d in ['uploads', 'logs', 'backups', 'instance']:
         os.makedirs(d, exist_ok=True)
 
     app.logger.info('🚀 BaxtiyorAiTest Application initialized successfully')
-
-    # Temporary Home Route
-    @app.route('/')
-    def home():
-        return """
-        <h1>🚀 BaxtiyorAiTest</h1>
-        <p><strong>Platforma muvaffaqiyatli ishga tushdi!</strong></p>
-        <p><a href="/login">Login</a> | <a href="/register">Register</a></p>
-        """
 
     return app
