@@ -1,24 +1,17 @@
 """
-BaxtiyorAiTest - Main Entry Point
-Production-ready Flask application launcher
+BaxtiyorAiTest - Main Entry Point for Render.com and Production
 """
 
-from app import create_app
 import os
+import sys
 
-# Create Flask application instance
+# Muhim: Python pathni to'g'rilash (Render.com uchun kerak)
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
+
+from app import create_app
+
 app = create_app()
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    debug = os.environ.get('FLASK_ENV') == 'development'
-    
-    print(f"🚀 BaxtiyorAiTest starting on http://0.0.0.0:{port}")
-    print(f"🌍 Environment: {'Development' if debug else 'Production'}")
-    
-    app.run(
-        host='0.0.0.0',
-        port=port,
-        debug=debug,
-        threaded=True
-    )
+    app.run(host='0.0.0.0', port=port, debug=False)
