@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %}BaxtiyorAiTest - Advanced AI Platform{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-gray-950 via-purple-950 to-gray-950">
+    
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-6 py-2 rounded-full mb-6 border border-white/20">
+                <span class="text-emerald-400">●</span>
+                <span class="text-sm font-medium">Production Ready AI Platform</span>
+            </div>
+            
+            <h1 class="text-6xl md:text-7xl font-bold leading-tight mb-6">
+                Chat with the<br>
+                <span class="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Future of AI
+                </span>
+            </h1>
+            
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
+                Powerful AI chat, custom bots, creator marketplace. 
+                Built with Groq speed and enterprise security.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/api/auth/login" 
+                   class="px-10 py-4 bg-white text-black font-semibold rounded-2xl hover:bg-gray-200 transition-all text-lg flex items-center justify-center gap-3">
+                    <i class="fas fa-rocket"></i>
+                    Boshlash
+                </a>
+                <a href="#features" 
+                   class="px-10 py-4 border border-white/30 hover:border-white/60 font-medium rounded-2xl transition-all text-lg">
+                    Batafsil ko'rish
+                </a>
+            </div>
+            
+            <div class="mt-12 flex justify-center gap-8 text-sm text-gray-400">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-bolt text-yellow-400"></i>
+                    Groq Lightning Fast
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-shield-alt text-emerald-400"></i>
+                    Enterprise Security
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-users text-purple-400"></i>
+                    Creator Economy
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="py-20 bg-black/40">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16">Nima uchun BaxtiyorAiTest?</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-900/70 border border-white/10 rounded-3xl p-8 hover:border-purple-500/50 transition-all group">
+                    <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                        💬
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-3">Smart Chat</h3>
+                    <p class="text-gray-400">Groq + HuggingFace + Fallback. Context memory bilan ishlaydi.</p>
+                </div>
+                
+                <div class="bg-gray-900/70 border border-white/10 rounded-3xl p-8 hover:border-purple-500/50 transition-all group">
+                    <div class="w-14 h-14 bg-pink-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                        🤖
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-3">Custom Bots</h3>
+                    <p class="text-gray-400">O'zingizning AI botlaringizni yarating va bozorda ulashing.</p>
+                </div>
+                
+                <div class="bg-gray-900/70 border border-white/10 rounded-3xl p-8 hover:border-purple-500/50 transition-all group">
+                    <div class="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+                        👑
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-3">Creator Hub</h3>
+                    <p class="text-gray-400">Creator bo'ling, botlaringizni monetizatsiya qiling.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 border-t border-white/10">
+        <div class="max-w-4xl mx-auto text-center px-6">
+            <h2 class="text-5xl font-bold mb-6">Hozir boshlang</h2>
+            <p class="text-xl text-gray-400 mb-10">Bepul hisob yarating va dunyodagi eng tez AI bilan suhbatlashing.</p>
+            <a href="/api/auth/register" 
+               class="inline-block px-12 py-5 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-xl rounded-3xl hover:scale-105 transition-all">
+                Ro'yxatdan o'tish — Bepul
+            </a>
+        </div>
+    </section>
+</div>
+{% endblock %}

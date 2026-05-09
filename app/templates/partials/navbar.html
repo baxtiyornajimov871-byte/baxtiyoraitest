@@ -1,0 +1,84 @@
+<!-- app/templates/partials/navbar.html -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-gray-950 border-b border-white/10 backdrop-blur-lg">
+    <div class="max-w-screen-2xl mx-auto px-6">
+        <div class="h-16 flex items-center justify-between">
+            
+            <!-- Left Side -->
+            <div class="flex items-center gap-8">
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleSidebar()" 
+                        class="lg:hidden text-2xl text-gray-300 hover:text-white">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <!-- Logo (Mobile) -->
+                <a href="/" class="flex items-center gap-2 lg:hidden">
+                    <span class="text-2xl font-bold text-purple-400">B</span>
+                    <span class="font-semibold">AI</span>
+                </a>
+            </div>
+
+            <!-- Center - Search -->
+            <div class="hidden md:flex flex-1 max-w-xl mx-8">
+                <div class="relative w-full">
+                    <input type="text" id="global-search" 
+                           placeholder="Suhbatlar, botlar yoki foydalanuvchilarni qidirish..."
+                           onkeyup="if(event.key === 'Enter') globalSearch()"
+                           class="w-full bg-gray-900 border border-white/10 focus:border-purple-500 rounded-2xl py-3 px-6 pl-12 text-sm">
+                    <i class="fas fa-search absolute left-5 top-3.5 text-gray-500"></i>
+                </div>
+            </div>
+
+            <!-- Right Side -->
+            <div class="flex items-center gap-4">
+                
+                <!-- New Chat Button -->
+                <a href="/api/chat/new" 
+                   class="hidden sm:flex items-center gap-2 bg-purple-600 hover:bg-purple-500 px-5 py-2.5 rounded-2xl text-sm font-medium transition-all">
+                    <i class="fas fa-plus"></i>
+                    <span>Yangi Chat</span>
+                </a>
+
+                <!-- Notifications -->
+                <button class="w-10 h-10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/10 rounded-2xl transition-colors relative">
+                    <i class="fas fa-bell"></i>
+                    <span class="absolute top-1.5 right-1.5 w-4 h-4 bg-red-500 text-[10px] rounded-full flex items-center justify-center">3</span>
+                </button>
+
+                <!-- User Menu -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="toggleUserMenu()">
+                    <div id="nav-avatar" 
+                         class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-white text-sm font-bold">
+                        U
+                    </div>
+                    <div class="hidden md:block">
+                        <p id="nav-username" class="text-sm font-medium">Foydalanuvchi</p>
+                        <p class="text-[10px] text-gray-500 -mt-1">Online</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Dropdown Menu -->
+    <div id="user-dropdown" class="hidden absolute right-8 top-16 bg-gray-900 border border-white/10 rounded-3xl shadow-2xl py-2 w-56 z-50">
+        <a href="/api/user/profile" class="block px-6 py-3 hover:bg-white/10 flex items-center gap-3">
+            <i class="fas fa-user"></i>
+            <span>Profil</span>
+        </a>
+        <a href="/api/creator/dashboard" class="block px-6 py-3 hover:bg-white/10 flex items-center gap-3">
+            <i class="fas fa-user-tie"></i>
+            <span>Creator Dashboard</span>
+        </a>
+        <a href="/api/bots/my-bots" class="block px-6 py-3 hover:bg-white/10 flex items-center gap-3">
+            <i class="fas fa-robot"></i>
+            <span>Mening Botlarim</span>
+        </a>
+        <div class="h-px bg-white/10 my-2 mx-4"></div>
+        <button onclick="logout()" 
+                class="w-full text-left px-6 py-3 hover:bg-red-500/10 text-red-400 flex items-center gap-3">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Tizimdan chiqish</span>
+        </button>
+    </div>
+</nav>

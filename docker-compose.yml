@@ -1,0 +1,70 @@
+version: '3.9'
+
+services:
+  baxtiyoraitest:
+    build: .
+    container_name: baxtiyoraitest
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - DATABASE_URL=postgresql://baxtiyor:strongpassword@db:5432/baxtiyoraidb
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - HUGGINGFACE_API_KEY=${HUGGINGFACE_API_KEY}
+      - SECRET_KEY=${SECRET_KEY}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+    volumes:
+      - .:/app
+      - uploads:/app/uploads
+      - logs:/app/logs
+    depends_on:
+      - db
+      - redis
+    restart: unless-stopped
+    networks:
+      - baxtiyor-net
+
+  db:
+    image: postgres:16-alpine
+    container_name: baxtiyoraitest-db
+    environment:
+      POSTGRES_USER: baxtiyor
+      POSTGRES_PASSWORD: strongpassword
+      POSTGRES_DB: baxtiyoraidb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - baxtiyor-net
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: baxtiyoraitest-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - baxtiyor-net
+    restart: unless-stopped
+
+  # Optional: Celery Worker (for future background tasks)
+  # celery_worker:
+  #   build: .
+  #   command: celery -A app.tasks.celery worker --loglevel=info
+  #   depends_on:
+  #     - redis
+  #   networks:
+  #     - baxtiyor-net
+
+volumes:
+  postgres_data:
+  redis_data:
+  uploads:
+  logs:
+
+networks:
+  baxtiyor-net:
+    driver: bridge

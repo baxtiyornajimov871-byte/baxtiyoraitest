@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %}Yangi Bot Yaratish - BaxtiyorAiTest{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto p-6">
+    <div class="bg-gray-900 rounded-3xl border border-white/10 p-10">
+        
+        <div class="flex items-center gap-4 mb-10">
+            <div class="text-5xl">🤖</div>
+            <div>
+                <h1 class="text-4xl font-bold">Yangi Custom AI Bot Yaratish</h1>
+                <p class="text-gray-400">O'zingizning shaxsiy AI yordamchingizni yarating</p>
+            </div>
+        </div>
+
+        <form id="createBotForm" class="space-y-8">
+            
+            <!-- Basic Info -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Bot Nomi *</label>
+                    <input type="text" id="bot-name" 
+                           class="w-full bg-gray-800 border border-gray-700 rounded-2xl px-6 py-4 focus:outline-none focus:border-purple-500"
+                           placeholder="Masalan: Code Assistant" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Kategoriya</label>
+                    <select id="bot-category" 
+                            class="w-full bg-gray-800 border border-gray-700 rounded-2xl px-6 py-4 focus:outline-none focus:border-purple-500">
+                        <option value="Assistant">Umumiy Yordamchi</option>
+                        <option value="Coding">Dasturlash</option>
+                        <option value="Creative">Ijodiy</option>
+                        <option value="Tutor">O'qituvchi</option>
+                        <option value="Roleplay">Roleplay</option>
+                        <option value="Other">Boshqa</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-400 mb-2">Qisqa tavsif *</label>
+                <textarea id="bot-description" rows="3"
+                    class="w-full bg-gray-800 border border-gray-700 rounded-2xl px-6 py-4 focus:outline-none focus:border-purple-500"
+                    placeholder="Bu bot nima qiladi?"></textarea>
+            </div>
+
+            <!-- System Prompt -->
+            <div>
+                <label class="block text-sm font-medium text-gray-400 mb-2">System Prompt (Asosiy ko'rsatma) *</label>
+                <textarea id="system-prompt" rows="8"
+                    class="w-full bg-gray-800 border border-gray-700 rounded-3xl px-6 py-5 focus:outline-none focus:border-purple-500 font-mono text-sm"
+                    placeholder="Siz foydali, aqlli va do'stona AI yordamchisiz..."></textarea>
+                <p class="text-xs text-gray-500 mt-2">Botning xarakteri va qoidalari shu yerda belgilanadi.</p>
+            </div>
+
+            <!-- Greeting Message -->
+            <div>
+                <label class="block text-sm font-medium text-gray-400 mb-2">Salomlashuv Xabari</label>
+                <input type="text" id="greeting-message" 
+                       class="w-full bg-gray-800 border border-gray-700 rounded-2xl px-6 py-4 focus:outline-none focus:border-purple-500"
+                       placeholder="Salom! Men sizga qanday yordam bera olaman?">
+            </div>
+
+            <!-- Settings -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Temperature</label>
+                    <input type="range" id="temperature" min="0" max="1" step="0.1" value="0.8" 
+                           class="w-full accent-purple-600">
+                    <div class="flex justify-between text-xs text-gray-500">
+                        <span>Precise</span>
+                        <span id="temp-value">0.8</span>
+                        <span>Creative</span>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Ko'rinish</label>
+                    <select id="visibility" class="w-full bg-gray-800 border border-gray-700 rounded-2xl px-6 py-4">
+                        <option value="public">Public (Bozorda ko'rinadi)</option>
+                        <option value="private">Private (Faqat men uchun)</option>
+                        <option value="unlisted">Unlisted (Havola orqali)</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Avatar (URL)</label>
+                    <input type="text" id="bot-avatar" 
+                           class="w-full bg-gray-800 border border-gray-700 rounded-2xl px-6 py-4 focus:outline-none focus:border-purple-500"
+                           placeholder="https://...">
+                </div>
+            </div>
+
+            <div class="pt-6 border-t border-white/10 flex gap-4">
+                <button type="button" onclick="previewBot()" 
+                        class="flex-1 py-4 border border-white/30 hover:bg-white/5 rounded-2xl font-medium">
+                    Oldindan ko'rish
+                </button>
+                <button type="submit" 
+                        class="flex-1 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl font-semibold">
+                    Botni Yaratish
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/bot.js"></script>
+<script>
+    document.getElementById('temperature').addEventListener('input', function() {
+        document.getElementById('temp-value').textContent = this.value;
+    });
+
+    document.getElementById('createBotForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        createBot();
+    });
+</script>
+{% endblock %}

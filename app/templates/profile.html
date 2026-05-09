@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}Profil - BaxtiyorAiTest{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto p-6">
+    
+    <div class="bg-gray-900 rounded-3xl overflow-hidden border border-white/10">
+        
+        <!-- Cover Banner -->
+        <div class="h-64 bg-gradient-to-r from-purple-700 via-pink-600 to-purple-800 relative">
+            <div class="absolute -bottom-16 left-8 flex items-end gap-6">
+                <!-- Avatar -->
+                <div class="w-32 h-32 bg-gray-800 rounded-3xl border-4 border-gray-900 overflow-hidden">
+                    <img id="profile-avatar" 
+                         src="/static/images/default_avatar.png" 
+                         alt="Avatar"
+                         class="w-full h-full object-cover">
+                </div>
+                
+                <div class="mb-4">
+                    <h1 id="display-name" class="text-4xl font-bold">Foydalanuvchi</h1>
+                    <p id="username" class="text-gray-400">@username</p>
+                </div>
+            </div>
+            
+            <button onclick="editProfile()" 
+                    class="absolute top-6 right-6 px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-2xl text-sm font-medium flex items-center gap-2 transition-all">
+                <i class="fas fa-edit"></i>
+                <span>Tahrirlash</span>
+            </button>
+        </div>
+
+        <div class="pt-20 px-8 pb-8">
+            
+            <!-- Bio -->
+            <div class="mb-8">
+                <p id="bio" class="text-gray-300 leading-relaxed text-lg">
+                    Bio mavjud emas.
+                </p>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-6 mb-10">
+                <div class="bg-gray-800/50 rounded-2xl p-6 text-center">
+                    <div class="text-3xl font-bold text-purple-400" id="chat-count">0</div>
+                    <div class="text-sm text-gray-400">Suhbatlar</div>
+                </div>
+                <div class="bg-gray-800/50 rounded-2xl p-6 text-center">
+                    <div class="text-3xl font-bold text-pink-400" id="message-count">0</div>
+                    <div class="text-sm text-gray-400">Xabarlar</div>
+                </div>
+                <div class="bg-gray-800/50 rounded-2xl p-6 text-center">
+                    <div class="text-3xl font-bold text-emerald-400" id="join-date">2026</div>
+                    <div class="text-sm text-gray-400">Ro'yxatdan o'tgan</div>
+                </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="mb-10">
+                <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <i class="fas fa-link"></i> 
+                    Ijtimoiy tarmoqlar
+                </h3>
+                <div class="flex flex-wrap gap-4" id="social-links">
+                    <!-- JavaScript orqali to'ldiriladi -->
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <a href="/api/creator/dashboard" 
+                   class="bg-gradient-to-br from-purple-600 to-pink-600 p-8 rounded-3xl hover:scale-105 transition-all group">
+                    <div class="text-4xl mb-4">👑</div>
+                    <h3 class="text-2xl font-bold mb-2">Creator Dashboard</h3>
+                    <p class="text-purple-100/80">Botlaringizni boshqaring va daromad oling</p>
+                </a>
+                
+                <a href="/api/bots/my-bots" 
+                   class="bg-gray-800 p-8 rounded-3xl hover:bg-gray-700 transition-all group">
+                    <div class="text-4xl mb-4">🤖</div>
+                    <h3 class="text-2xl font-bold mb-2">Mening Botlarim</h3>
+                    <p class="text-gray-400">Yaratgan barcha AI botlaringiz</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/main.js"></script>
+<script>
+    // Profil ma'lumotlarini yuklash
+    document.addEventListener('DOMContentLoaded', function() {
+        loadUserProfile();
+    });
+</script>
+{% endblock %}

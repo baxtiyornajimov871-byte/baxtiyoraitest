@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}404 - Sahifa Topilmadi{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-950">
+    <div class="text-center px-6">
+        
+        <!-- 404 Illustration -->
+        <div class="mb-10">
+            <h1 class="text-[180px] font-black text-transparent bg-clip-text bg-gradient-to-br from-gray-700 to-gray-900 leading-none select-none">
+                404
+            </h1>
+        </div>
+
+        <div class="max-w-md mx-auto">
+            <h2 class="text-4xl font-bold text-white mb-4">Sahifa topilmadi</h2>
+            <p class="text-gray-400 text-lg mb-10">
+                Siz izlagan sahifa mavjud emas yoki o'chirib tashlangan bo'lishi mumkin.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="history.back()" 
+                        class="px-8 py-4 border border-white/30 hover:bg-white/5 rounded-2xl text-white font-medium transition-all">
+                    ← Orqaga qaytish
+                </button>
+                
+                <a href="/" 
+                   class="px-10 py-4 bg-white text-black rounded-2xl font-semibold hover:bg-gray-100 transition-all">
+                    Bosh Sahifaga
+                </a>
+            </div>
+        </div>
+
+        <!-- Fun Element -->
+        <div class="mt-20 text-gray-600 text-sm flex items-center justify-center gap-2">
+            <i class="fas fa-robot"></i>
+            <span>BaxtiyorAI hali ham sizga yordam berishga tayyor</span>
+        </div>
+    </div>
+</div>
+{% endblock %}

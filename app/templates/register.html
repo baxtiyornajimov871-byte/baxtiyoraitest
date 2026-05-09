@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}Ro'yxatdan o'tish - BaxtiyorAiTest{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 to-black p-6">
+    <div class="w-full max-w-md">
+        
+        <!-- Logo -->
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center gap-3 text-4xl font-bold">
+                <span class="text-purple-500">B</span>
+                <span class="text-white">axtiyor</span>
+                <span class="text-purple-400">AI</span>
+            </div>
+            <p class="text-gray-400 mt-2">Advanced AI Platform</p>
+        </div>
+
+        <div class="bg-gray-900/80 backdrop-blur-xl border border-white/10 rounded-3xl p-10 shadow-2xl">
+            <h2 class="text-3xl font-bold text-center mb-2">Hisob yaratish</h2>
+            <p class="text-center text-gray-400 mb-8">Bir daqiqada ro'yxatdan o'ting</p>
+            
+            <form id="registerForm" class="space-y-6">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-2">Foydalanuvchi nomi</label>
+                        <input type="text" id="username" 
+                               class="w-full bg-gray-800 border border-gray-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-purple-500 transition-colors"
+                               placeholder="username" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-2">Ism (ixtiyoriy)</label>
+                        <input type="text" id="display_name" 
+                               class="w-full bg-gray-800 border border-gray-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-purple-500 transition-colors"
+                               placeholder="Ismingiz">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Email manzil</label>
+                    <input type="email" id="email" 
+                           class="w-full bg-gray-800 border border-gray-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-purple-500 transition-colors"
+                           placeholder="example@email.com" required>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Parol</label>
+                    <input type="password" id="password" 
+                           class="w-full bg-gray-800 border border-gray-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-purple-500 transition-colors"
+                           placeholder="••••••••" required>
+                    <p class="text-xs text-gray-500 mt-1">Kamida 8 ta belgi, katta va kichik harf, raqam</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Parolni tasdiqlang</label>
+                    <input type="password" id="password_confirm" 
+                           class="w-full bg-gray-800 border border-gray-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-purple-500 transition-colors"
+                           placeholder="••••••••" required>
+                </div>
+
+                <button type="submit"
+                        class="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 rounded-2xl font-semibold text-lg transition-all duration-300 flex items-center justify-center gap-3">
+                    <i class="fas fa-user-plus"></i>
+                    Ro'yxatdan o'tish
+                </button>
+            </form>
+
+            <div class="mt-8 text-center">
+                <p class="text-gray-400">
+                    Hisobingiz bormi? 
+                    <a href="/api/auth/login" class="text-purple-400 hover:text-purple-300 font-medium">Kirish</a>
+                </p>
+            </div>
+        </div>
+
+        <p class="text-center text-xs text-gray-500 mt-8">
+            Ro'yxatdan o'tish orqali <span class="text-purple-400">Foydalanish shartlari</span> va 
+            <span class="text-purple-400">Maxfiylik siyosati</span> bilan tanishib chiqqan bo'lasiz.
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/auth.js"></script>
+{% endblock %}

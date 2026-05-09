@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Suhbatlar - BaxtiyorAiTest{% endblock %}
+
+{% block content %}
+<div class="p-6">
+    <div class="max-w-6xl mx-auto">
+        
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold">Suhbatlarim</h1>
+                <p class="text-gray-400">Barcha suhbatlaringizni boshqaring</p>
+            </div>
+            
+            <button onclick="createNewChat()" 
+                    class="flex items-center gap-3 bg-purple-600 hover:bg-purple-500 px-6 py-3 rounded-2xl font-medium transition-all">
+                <i class="fas fa-plus"></i>
+                <span>Yangi suhbat</span>
+            </button>
+        </div>
+
+        <!-- Search -->
+        <div class="relative mb-8">
+            <input type="text" id="search-input" 
+                   onkeyup="searchConversations()"
+                   class="w-full bg-gray-800 border border-gray-700 rounded-2xl px-6 py-4 pl-12 focus:outline-none focus:border-purple-500"
+                   placeholder="Suhbatlarni qidirish...">
+            <i class="fas fa-search absolute left-5 top-4.5 text-gray-500"></i>
+        </div>
+
+        <!-- Filters -->
+        <div class="flex gap-2 mb-6 text-sm">
+            <button onclick="filterConversations('all')" 
+                    class="active-filter px-5 py-2 rounded-xl border border-white/20 hover:bg-white/5">Barchasi</button>
+            <button onclick="filterConversations('pinned')" 
+                    class="px-5 py-2 rounded-xl border border-white/20 hover:bg-white/5">Pinned</button>
+            <button onclick="filterConversations('favorite')" 
+                    class="px-5 py-2 rounded-xl border border-white/20 hover:bg-white/5">Favorites</button>
+            <button onclick="filterConversations('archived')" 
+                    class="px-5 py-2 rounded-xl border border-white/20 hover:bg-white/5">Archived</button>
+        </div>
+
+        <!-- Conversations List -->
+        <div id="conversations-list" class="space-y-3">
+            <!-- JavaScript orqali to'ldiriladi -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden text-center py-20">
+            <div class="text-6xl mb-6 opacity-40">📭</div>
+            <h3 class="text-xl font-medium mb-2">Hali suhbat yo'q</h3>
+            <p class="text-gray-400 mb-6">Yangi suhbat boshlash uchun tugmani bosing</p>
+            <button onclick="createNewChat()" 
+                    class="bg-purple-600 px-8 py-3 rounded-2xl font-medium">
+                Yangi suhbat yaratish
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/chat.js"></script>
+<script>
+    // Sahifa yuklanganda suhbatlarni yuklash
+    document.addEventListener('DOMContentLoaded', function() {
+        loadConversations();
+    });
+</script>
+{% endblock %}

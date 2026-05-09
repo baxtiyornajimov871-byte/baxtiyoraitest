@@ -1,0 +1,82 @@
+<!-- app/templates/partials/sidebar.html -->
+<aside id="sidebar" 
+       class="w-72 bg-gray-950 border-r border-white/10 h-full flex-shrink-0 overflow-y-auto custom-scrollbar hidden lg:flex flex-col">
+
+    <!-- Logo -->
+    <div class="p-6 border-b border-white/10">
+        <div class="flex items-center gap-3">
+            <div class="w-9 h-9 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-white font-bold text-xl">
+                B
+            </div>
+            <div>
+                <span class="font-bold text-2xl tracking-tight">Baxtiyor</span>
+                <span class="text-purple-400 font-bold">AI</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex-1 px-3 py-6 space-y-1">
+        
+        <a href="/" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl hover:bg-white/5 transition-colors text-gray-300 hover:text-white">
+            <i class="fas fa-home w-5"></i>
+            <span>Bosh Sahifa</span>
+        </a>
+        
+        <a href="/api/chat/new" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl hover:bg-white/5 transition-colors text-gray-300 hover:text-white bg-white/10">
+            <i class="fas fa-comment-dots w-5"></i>
+            <span>Yangi Suhbat</span>
+        </a>
+        
+        <a href="/api/conversations" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl hover:bg-white/5 transition-colors text-gray-300 hover:text-white">
+            <i class="fas fa-history w-5"></i>
+            <span>Suhbatlar</span>
+        </a>
+
+        <div class="h-px bg-white/10 my-4 mx-5"></div>
+
+        <!-- Marketplace -->
+        <a href="/api/public/bots" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl hover:bg-white/5 transition-colors text-gray-300 hover:text-white">
+            <i class="fas fa-store w-5"></i>
+            <span>Bot Bozori</span>
+        </a>
+        
+        <a href="/api/creator/dashboard" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl hover:bg-white/5 transition-colors text-gray-300 hover:text-white">
+            <i class="fas fa-user-tie w-5"></i>
+            <span>Creator Hub</span>
+        </a>
+
+        <div class="h-px bg-white/10 my-4 mx-5"></div>
+
+        <!-- My Stuff -->
+        <a href="/api/bots/my-bots" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl hover:bg-white/5 transition-colors text-gray-300 hover:text-white">
+            <i class="fas fa-robot w-5"></i>
+            <span>Mening Botlarim</span>
+        </a>
+        
+        <a href="/api/user/profile" class="nav-item flex items-center gap-3 px-5 py-3.5 rounded-2xl hover:bg-white/5 transition-colors text-gray-300 hover:text-white">
+            <i class="fas fa-user w-5"></i>
+            <span>Profil</span>
+        </a>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="p-6 border-t border-white/10 mt-auto">
+        <div onclick="logout()" 
+             class="flex items-center gap-3 px-5 py-3 text-red-400 hover:bg-red-500/10 rounded-2xl cursor-pointer transition-colors">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Chiqish</span>
+        </div>
+        
+        <div class="text-[10px] text-gray-500 text-center mt-6">
+            BaxtiyorAiTest v1.0.0
+        </div>
+    </div>
+</aside>
+
+<!-- Mobile Sidebar Overlay -->
+<div id="mobile-sidebar-overlay" class="hidden fixed inset-0 bg-black/70 z-50 lg:hidden">
+    <div class="w-72 h-full bg-gray-950 border-r border-white/10">
+        <!-- Same content as desktop sidebar can be duplicated or use JS to clone -->
+    </div>
+</div>

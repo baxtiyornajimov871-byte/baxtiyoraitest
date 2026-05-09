@@ -1,0 +1,147 @@
+/* =============================================
+   BaxtiyorAiTest - Chat Specific Styles
+   ============================================= */
+
+#messages {
+    scroll-behavior: smooth;
+}
+
+#message-input {
+    resize: none;
+    scrollbar-width: thin;
+}
+
+#message-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+}
+
+/* Message Bubbles */
+.message {
+    position: relative;
+    padding: 16px 20px;
+    border-radius: 20px;
+    max-width: 85%;
+    word-wrap: break-word;
+    animation: messagePop 0.3s ease forwards;
+}
+
+.message.user {
+    background: linear-gradient(135deg, #a855f7, #c026d3);
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 6px;
+}
+
+.message.assistant {
+    background: #1f2937;
+    border: 1px solid #374151;
+    margin-right: auto;
+    border-bottom-left-radius: 6px;
+}
+
+/* Typing Indicator */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 18px;
+    background: #1f2937;
+    border-radius: 9999px;
+    width: fit-content;
+}
+
+.typing-dot {
+    width: 6px;
+    height: 6px;
+    background: #9ca3af;
+    border-radius: 50%;
+    animation: typingBounce 1.2s infinite;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingBounce {
+    0%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-5px); }
+}
+
+/* Copy Button */
+.copy-btn {
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.message:hover .copy-btn {
+    opacity: 1;
+}
+
+/* Model Selector */
+.model-selector {
+    transition: all 0.2s ease;
+}
+
+.model-selector:hover {
+    background-color: #374151;
+}
+
+/* File Upload Preview */
+.upload-preview {
+    background: #1f2937;
+    border: 2px dashed #6b7280;
+    border-radius: 16px;
+    padding: 12px;
+    transition: all 0.3s ease;
+}
+
+.upload-preview:hover {
+    border-color: #a855f7;
+}
+
+/* Animations */
+@keyframes messagePop {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Markdown Rendering */
+.markdown p {
+    margin-bottom: 1em;
+    line-height: 1.7;
+}
+
+.markdown ul, .markdown ol {
+    margin: 1em 0;
+    padding-left: 1.5em;
+}
+
+.markdown code {
+    font-size: 0.9em;
+    padding: 0.1em 0.4em;
+    background: #111827;
+    border-radius: 4px;
+}
+
+.markdown pre code {
+    background: transparent;
+    padding: 0;
+}
+
+/* Mobile Chat Optimizations */
+@media (max-width: 768px) {
+    #messages {
+        padding: 12px;
+    }
+    
+    .message {
+        max-width: 92%;
+        padding: 14px 18px;
+    }
+}

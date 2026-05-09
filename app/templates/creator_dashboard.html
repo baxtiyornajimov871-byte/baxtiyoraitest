@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Creator Dashboard - BaxtiyorAiTest{% endblock %}
+
+{% block content %}
+<div class="p-6 max-w-7xl mx-auto">
+    
+    <div class="flex justify-between items-center mb-10">
+        <div>
+            <h1 class="text-4xl font-bold">Creator Dashboard</h1>
+            <p class="text-gray-400">Botlaringizni boshqaring va statistikangizni kuzatib boring</p>
+        </div>
+        <button onclick="createNewBot()" 
+                class="flex items-center gap-3 bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-4 rounded-2xl font-semibold hover:scale-105 transition-all">
+            <i class="fas fa-plus"></i>
+            <span>Yangi Bot Yaratish</span>
+        </button>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+        <div class="bg-gray-900 rounded-3xl p-8 border border-white/10">
+            <div class="text-purple-400 text-4xl mb-4">🤖</div>
+            <div id="total-bots" class="text-5xl font-bold">0</div>
+            <div class="text-gray-400">Jami Botlar</div>
+        </div>
+        <div class="bg-gray-900 rounded-3xl p-8 border border-white/10">
+            <div class="text-pink-400 text-4xl mb-4">👥</div>
+            <div id="total-usage" class="text-5xl font-bold">0</div>
+            <div class="text-gray-400">Foydalanishlar</div>
+        </div>
+        <div class="bg-gray-900 rounded-3xl p-8 border border-white/10">
+            <div class="text-emerald-400 text-4xl mb-4">❤️</div>
+            <div id="total-likes" class="text-5xl font-bold">0</div>
+            <div class="text-gray-400">Like'lar</div>
+        </div>
+        <div class="bg-gray-900 rounded-3xl p-8 border border-white/10">
+            <div class="text-amber-400 text-4xl mb-4">📈</div>
+            <div id="this-month" class="text-5xl font-bold">0</div>
+            <div class="text-gray-400">Bu oy</div>
+        </div>
+    </div>
+
+    <!-- My Bots -->
+    <div class="mb-12">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-semibold">Mening Botlarim</h2>
+            <a href="/api/bots/my-bots" class="text-purple-400 hover:text-purple-300 text-sm flex items-center gap-2">
+                Barchasini ko'rish <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        
+        <div id="my-bots-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- JavaScript orqali to'ldiriladi -->
+        </div>
+    </div>
+
+    <!-- Analytics Chart Placeholder -->
+    <div class="bg-gray-900 rounded-3xl p-8 border border-white/10">
+        <h3 class="text-xl font-semibold mb-6">Foydalanish Statistika</h3>
+        <div class="h-80 bg-gray-800/50 rounded-2xl flex items-center justify-center text-gray-500">
+            <div class="text-center">
+                <i class="fas fa-chart-line text-6xl mb-4"></i>
+                <p>Interactive Analytics Chart (Chart.js yoki ApexCharts bilan keyinroq qo'shiladi)</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/bot.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadCreatorDashboard();
+    });
+</script>
+{% endblock %}
